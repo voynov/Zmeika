@@ -1,6 +1,6 @@
 #include "constants.h"
 
-int menuPaneHeight = 100.0;
+int menuPaneHeight = 66;
 int N = 30, M = 20;
 int Scale=25;
 int statPanelWidth = Scale * 10;
@@ -19,10 +19,13 @@ int minutesFinish = 0;
 int secondsFinish = 0;
 
 int spacingBetweenButtons = 1;
-int buttonStandartWidth = (w-spacingBetweenButtons)/numberOfMenuButtons - spacingBetweenButtons;
+int buttonStandartWidth = w/numberOfMenuButtons - spacingBetweenButtons;
 int buttonStandartHeight = 40;
 const char * arrayOfStrings[] = {"New", "Pause", "Stats", "Exit", "About"};
 char gameOverText[] = "GAME OVER";
+
+const char * authorName = "Denis Fominyh";
+const char * year = "2013";
 
 int dir,num=4;
 time_t timeOfPlay;
@@ -61,3 +64,11 @@ double colorBlueOfSelectedButton = 0.5;
 double colorRedOfButtonText = 230;
 double colorGreenOfButtonText = 310;
 double colorBlueOfButtonText = 100;
+
+double colorRedOfStatsText = 40;
+double colorGreenOfStatsText = 100;
+double colorBlueOfStatsText = 64;
+
+double colorRedOfStatsBackground = 220;
+double colorGreenOfStatsBackground = 220;
+double colorBlueOfStatsBackground = 220;

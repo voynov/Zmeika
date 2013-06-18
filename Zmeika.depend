@@ -266,13 +266,13 @@
 	"constants.h"
 	<string.h>
 
-1371580897 source:c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\constant.cpp
+1371590972 source:c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\constant.cpp
 	"constants.h"
 
-1371580897 c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\constants.h
+1371591401 c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\constants.h
 	<ctime>
 
-1371583291 source:c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\main.cpp
+1371592040 source:c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\main.cpp
 	<windows.h>
 	<time.h>
 	<string.h>
@@ -284,11 +284,11 @@
 	"constants.h"
 	"Fruct.h"
 
-1371499135 c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\fruct.h
+1371587855 c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\fruct.h
 
 1371580917 c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\menubutton.h
 
-1371500838 source:c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\fruct.cpp
+1371587838 source:c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\fruct.cpp
 	"Fruct.h"
 	<stdlib.h>
 	"constants.h"

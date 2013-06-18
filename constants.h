@@ -29,6 +29,8 @@ extern int buttonStandartWidth;
 extern int buttonStandartHeight;
 const extern char * arrayOfStrings[numberOfMenuButtons];
 extern char gameOverText[10];
+const extern char * authorName;
+const extern char * year;
 
 extern int dir, num;
 extern time_t timeOfPlay;
@@ -36,8 +38,8 @@ extern struct tm * startGame;
 extern struct tm * pauseGame;
 
 extern struct coords {
-    int x;
-    int y;
+	int x;
+	int y;
 }  s[maxLengthOfSnake];
 //const extern int numberOfApples;
 //const extern int maxLengthOfSnake;
@@ -72,5 +74,12 @@ extern double colorRedOfButtonText;
 extern double colorGreenOfButtonText;
 extern double colorBlueOfButtonText;
 
+extern double colorRedOfStatsText;
+extern double colorGreenOfStatsText;
+extern double colorBlueOfStatsText;
+
+extern double colorRedOfStatsBackground;
+extern double colorGreenOfStatsBackground;
+extern double colorBlueOfStatsBackground;
 
 #endif // CONSTANTS_H_INCLUDED
