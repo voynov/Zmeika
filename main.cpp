@@ -11,7 +11,7 @@
 
 #include "constants.h"
 #include "Fruct.h"
-#include "menubutton.h"
+//#include "menubutton.h"
 //static int slices = 16;
 //static int stacks = 16;
 
@@ -28,7 +28,38 @@ void OnMouseClick(int button, int state, int x, int y);
 /* GLUT callback Handlers */
 
 class Fruct m[numberOfApples];
-class MenuButton buttons[numberOfMenuButtons];
+class MenuButton
+{
+    public:
+        int x, y;
+        int width, height;
+        int stateOfButton;
+        const char * nameOfButton;
+        void (*onClickFunction)(int);
+
+        MenuButton(){};
+
+    void New()
+    {
+        int spacing = 5;
+        if (0 == stateOfButton)
+        {
+            glColor3f(colorRedOfButton, colorGreenOfButton, colorBlueOfButton);
+        } else
+        {
+            glColor3f(colorRedOfSelectedButton, colorGreenOfSelectedButton, colorBlueOfSelectedButton);
+        }
+
+        glRectf(x, y, x + width, y + height);
+
+        glColor3f(colorRedOfButtonText/255.0, colorGreenOfButtonText/255.0, colorBlueOfButtonText/255.0);
+        glRasterPos2f( x + spacing, y + spacing);
+        for( int i = 0; nameOfButton[i] > 0; i++ )
+        {
+            glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, nameOfButton[i] );
+        }
+    }
+} buttons[numberOfMenuButtons];;
 
 int main(int argc, char *argv[])
 {
