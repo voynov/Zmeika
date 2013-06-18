@@ -21,7 +21,7 @@ int secondsFinish = 0;
 int spacingBetweenButtons = 1;
 int buttonStandartWidth = (w-spacingBetweenButtons)/numberOfMenuButtons - spacingBetweenButtons;
 int buttonStandartHeight = 40;
-char arrayOfStrings[numberOfMenuButtons][100] = {"New", "Pause", "Stats", "Exit", "About"};
+const char * arrayOfStrings[] = {"New", "Pause", "Stats", "Exit", "About"};
 char gameOverText[] = "GAME OVER";
 
 int dir,num=4;

@@ -8,7 +8,7 @@ class MenuButton
         int x, y;
         int width, height;
         int stateOfButton;
-        char * nameOfButton;
+        const char * nameOfButton;
         void (*onClickFunction)(int);
 
         MenuButton();

@@ -266,3 +266,38 @@
 	"constants.h"
 	<string.h>
 
+1371580897 source:c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\constant.cpp
+	"constants.h"
+
+1371580897 c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\constants.h
+	<ctime>
+
+1371580392 source:c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\main.cpp
+	<windows.h>
+	<time.h>
+	<string.h>
+	<GL/glut.h>
+	<ctime>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	"constants.h"
+	"Fruct.h"
+	"menubutton.h"
+
+1371499135 c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\fruct.h
+
+1371580917 c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\menubutton.h
+
+1371500838 source:c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\fruct.cpp
+	"Fruct.h"
+	<stdlib.h>
+	"constants.h"
+	<GL/glut.h>
+
+1371580243 source:c:\program files (x86)\codeblocks\share\codeblocks\templates\12\zmeika\menubutton.cpp
+	"menubutton.h"
+	<GL/glut.h>
+	"constants.h"
+	<string.h>
+

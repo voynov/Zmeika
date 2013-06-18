@@ -27,7 +27,7 @@ extern int secondsFinish;
 extern int spacingBetweenButtons;
 extern int buttonStandartWidth;
 extern int buttonStandartHeight;
-extern char arrayOfStrings[numberOfMenuButtons][100];
+const extern char * arrayOfStrings[numberOfMenuButtons];
 extern char gameOverText[10];
 
 extern int dir, num;

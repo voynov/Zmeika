@@ -418,6 +418,7 @@ void initializeButtons()
     {
         buttons[i].stateOfButton = 0;
         buttons[i].nameOfButton = arrayOfStrings[i];
+        glutSetWindowTitle(buttons[i].nameOfButton);
 
         buttons[i].onClickFunction = onClickFunctionArray[i];
     }
