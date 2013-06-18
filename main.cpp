@@ -12,6 +12,7 @@
 #include "constants.h"
 #include "Fruct.h"
 
+// prototypes of functions
 void gameOver();
 void initializeButtons();
 void DrawSnake();
@@ -21,7 +22,11 @@ void display();
 void KeyboardEvent(int key, int a, int b);
 void timer(int);
 void OnMouseClick(int button, int state, int x, int y);
+///////////////////////////////////////////////////////
 
+/*
+    Class Fruct represents game points which snake eats
+*/
 class Fruct m[numberOfApples];
 class MenuButton
 {
@@ -54,20 +59,20 @@ public:
 			glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, nameOfButton[i] );
 		}
 	}
-} buttons[numberOfMenuButtons];;
+} buttons[numberOfMenuButtons];
 
 int main(int argc, char *argv[])
 {
 	srand(time(0));
 	int i;
-	for (i=0;i<10;i++)
+	// init fruct positions
+	for (i = 0; i < 10; i++)
+    {
 		m[i].New();
-
-	s[i].x=10;
-	s[i].y=10;
+    }
 
 	glutInit(&argc, argv);
-	glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB );
+	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB );
 	glutInitWindowSize (w, h-menuPaneHeight);
 	glutCreateWindow ("Zmeika");
 	glClearColor(1.0, 1.0, 0.6, 1.0);  //background color
@@ -82,11 +87,19 @@ int main(int argc, char *argv[])
 
 	startGame = localtime(&now);
 
-	glutDisplayFunc (display);
+    // When GLUT determines that the window needs to be redisplayed, 'display' callback function is called.
+	glutDisplayFunc(display);
+
+	//The special keyboard callback function is triggered when keyboard is pressed.
 	glutSpecialFunc(KeyboardEvent);
+
+	//glutTimerFunc registers the timer callback function which will be triggered in msecs milliseconds.
 	glutTimerFunc(speedDelay, timer, 0);
+
+	//When a user presses and releases mouse buttons in the window, each press and each release generates 'OnMouseClick'.
 	glutMouseFunc(OnMouseClick);
 
+    //glutMainLoop enters the GLUT event processing loop. This routine should be called at most once in a GLUT program.
 	glutMainLoop();
 }
 
@@ -98,6 +111,7 @@ void displayText( float x, float y, int r, int g, int b, const char *string )
 	glRasterPos2f( x, y );
 	for( int i = 0; i < j; i++ )
 	{
+	    // glutBitmapCharacter renders one bitmap character using OpenGL
 		glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, string[i] );
 	}
 }
@@ -109,6 +123,7 @@ void DrawSnake()
 	int headNumber = 1;
 	for (int i = 0; i < headNumber; i++)
 	{
+	    // draw the rectangle using the function glRectf()
 		glRectf(s[i].x * Scale, s[i].y * Scale, (s[i].x + sizeCoefficient) * Scale, (s[i].y + sizeCoefficient) * Scale);
 	}
 
@@ -124,6 +139,7 @@ void collisionDetected()
 {
 	isGameOver = true;
 	gameOver();
+	//glutSetWindowTitle changes the window title
 	glutSetWindowTitle(gameOverText);
 }
 
@@ -131,28 +147,31 @@ void Tick()
 {
 	if (false == isGameOver)
 	{
+	    // copy all items of snake to new position
 		for (int i=num;i>0;--i)
 		{s[i].x=s[i-1].x;
 		s[i].y=s[i-1].y;}
 
-		if (dir==0) s[0].y+=1;
-		if (dir==1) s[0].x-=1;
-		if (dir==2) s[0].x+=1;
-		if (dir==3) s[0].y-=1;
+		if (dir==0) s[0].y+=1; // top
+		if (dir==1) s[0].x-=1; // left
+		if (dir==2) s[0].x+=1; // right
+		if (dir==3) s[0].y-=1; // down
 
 		for (int i=0; i<numberOfApples; i++)
 		{
 			if ((s[0].x == m[i].x) && (s[0].y == m[i].y))
 			{
 				num++;
-				m[i].New();
-				speedDelay -= 1;
+				m[i].New(); // generate new position
+				speedDelay -= 1; // delay time gets less
 			}
 		}
 
+        // check field bounds and move head to opposite side of field
 		if (s[0].x>N-1) s[0].x = 0;  if (s[0].x<0) s[0].x = N-1;
 		if (s[0].y>M-1) s[0].y = 0;  if (s[0].y<0) s[0].y = M-1;
 
+        // check snake has collision with itself
 		for (int i=1; i<num; i++)
 		{
 			if (s[0].x == s[i].x && s[0].y == s[i].y)
@@ -168,6 +187,9 @@ void Tick()
 void DrawField()
 {
 	glColor3f(colorRedOfLines, colorGreenOfLines, colorBlueOfLines);
+	// create figure between glBegin and glEnd.
+	// Ten symbolic constants are accepted: GL_POINTS, GL_LINES, GL_LINE_STRIP, GL_LINE_LOOP,
+	// GL_TRIANGLES, GL_TRIANGLE_STRIP, GL_TRIANGLE_FAN, GL_QUADS, GL_QUAD_STRIP, and GL_POLYGON.
 	glBegin(GL_LINES);
 	for (int i=0; i<w; i+=Scale)
 	{
@@ -180,12 +202,22 @@ void DrawField()
 	glEnd();
 }
 
+void drawMenuButtons()
+{
+    for (int i=0; i < numberOfMenuButtons; i++)
+	{
+        buttons[i].x = spacingBetweenButtons + i * (buttonStandartWidth + spacingBetweenButtons);
+        buttons[i].y = (M + 1) * Scale;
+        buttons[i].width = buttonStandartWidth;
+        buttons[i].height = buttonStandartHeight;
+        buttons[i].New();
+    }
+}
+
 void display()
 {
 	if (false == isGameOver)
 	{
-
-
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		DrawField();
@@ -197,33 +229,15 @@ void display()
 			m[i].DrawApple();
 		}
 
-		for (int i=0; i < numberOfMenuButtons; i++)
-		{
-			buttons[i].x = spacingBetweenButtons + i * (buttonStandartWidth + spacingBetweenButtons);
-			buttons[i].y = (M + 1) * Scale;
-			buttons[i].width = buttonStandartWidth;
-			buttons[i].height = buttonStandartHeight;
-			buttons[i].New();
-		}
+        // draw menu buttons at the top of field
+        drawMenuButtons();
 
-		glFlush();
+        // function glFlush() is not nesecarry for mode GLUT_DOUBLE but must be for mode GLUT_SINGLE
+        // see initialize in main: glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB );
+		//glFlush();
+
+		// If the mode in use is not double buffered, glutSwapBuffers has no effect
 		glutSwapBuffers();
-	}
-}
-
-
-
-void changeOppositeDirection()
-{
-
-	for (int i = 0; i < num/2; i++)
-	{
-		int temp = s[i].x;
-		s[i].x = s[num-1-i].x;
-		s[num-1-i].x = temp;
-		temp = s[i].y;
-		s[i].y = s[num-1-i].y;
-		s[num-1-i].y = temp;
 	}
 }
 
@@ -231,7 +245,7 @@ void KeyboardEvent(int key, int a, int b)
 {
 	switch(key)
 	{
-	case 101 :
+	case 101 : // arrow up on keyboard
 		{
             if (dir != 3 && true == wasDrawn)
 			{
@@ -240,7 +254,7 @@ void KeyboardEvent(int key, int a, int b)
 			}
 			break;
 		}
-	case 102 :
+	case 102 : // arrow right on keyboard
 		{
             if (dir != 1 && true == wasDrawn)
             {
@@ -249,7 +263,7 @@ void KeyboardEvent(int key, int a, int b)
 			}
 			break;
 		}
-	case 100 :
+	case 100 : // arrow left on keyboard
 		{
 			if (dir != 2 && true == wasDrawn)
 			{
@@ -258,7 +272,7 @@ void KeyboardEvent(int key, int a, int b)
 			}
 			break;
 		}
-	case 103 :
+	case 103 : // arrow down on keyboard
 		{
 			if (dir != 0 && true == wasDrawn)
 			{
@@ -285,12 +299,12 @@ bool checkButtonClick(MenuButton * btn, int button, int state, int x, int y)
 		x > btn->x && x < btn->x+btn->width &&
 		y > (h - (btn->y + btn->height)) && y < ((h - btn->y)))
 	{
-		if (state == 1)
+		if (state == 1) // mouse button was released up
 		{
 			btn->stateOfButton = 0;
 			btn->onClickFunction(btn->x);
 			return true;
-		} else
+		} else // click of mouse button
 		{
 			btn->stateOfButton = 1;
 			return true;
@@ -373,7 +387,7 @@ void onStatsButtonClick(int)
     }
 	time_t now = time(0);
 
-	glColor3f(255, 20, 255*10/6);
+	glColor3f(colorRedOfStatsBackground, colorGreenOfStatsBackground, colorBlueOfStatsBackground);
 	glRectf(N/2*Scale - statPanelWidth/2, M * Scale - statPanelHeight,
          N/2*Scale - statPanelWidth/2 + statPanelWidth,
          M * Scale - statPanelHeight + statPanelHeight);
@@ -391,12 +405,17 @@ void onStatsButtonClick(int)
 	char speedStr[20];
 	sprintf(speedStr, "Speed: %i", speedDelay);
 
-	displayText(N/2*Scale - 2*Scale,  M * Scale - Scale,
+	char sizeOfField[20];
+	sprintf(sizeOfField, "Size of field: %ix%i", N, M);
+
+	displayText(N/2*Scale - 2 * Scale,  M * Scale - Scale,
              colorRedOfStatsText, colorGreenOfStatsText, colorBlueOfStatsText, stat1);
-	displayText(N/2*Scale - 2*Scale,  M * Scale - 3*Scale,
+	displayText(N/2*Scale - 2 * Scale,  M * Scale - 3 * Scale,
              colorRedOfStatsText, colorGreenOfStatsText, colorBlueOfStatsText, minutesStr);
-	displayText(N/2*Scale - 2*Scale,  M * Scale - 5*Scale,
+	displayText(N/2*Scale - 2 * Scale,  M * Scale - 5 * Scale,
              colorRedOfStatsText, colorGreenOfStatsText, colorBlueOfStatsText, speedStr);
+    displayText(N/2 * Scale - 2 * Scale,  M * Scale - 7 * Scale,
+             colorRedOfStatsText, colorGreenOfStatsText, colorBlueOfStatsText, sizeOfField);
 	glFlush();
 	glutSwapBuffers();
 }

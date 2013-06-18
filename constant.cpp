@@ -27,7 +27,8 @@ char gameOverText[] = "GAME OVER";
 const char * authorName = "Denis Fominyh";
 const char * year = "2013";
 
-int dir,num=4;
+int dir = 0; // one of the option from: up, right, left, down
+int num = 4; // length of snake
 time_t timeOfPlay;
 struct tm * startGame;
 struct tm * pauseGame;
