@@ -81,6 +81,12 @@ int main(int argc, char *argv[])
     gluOrtho2D(0, w, 0, h);
 
     initializeButtons();
+    time_t now;
+
+    time(&now);  /* get current time; same as: now = time(NULL)  */
+
+    startGame = localtime(&now);
+
     glutDisplayFunc (display);
     glutSpecialFunc(KeyboardEvent);
     glutTimerFunc(speedDelay, timer, 0);
