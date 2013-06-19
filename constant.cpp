@@ -1,8 +1,8 @@
 #include "constants.h"
 
 int menuPaneHeight = 66;
-int N = 30, M = 20;
-int Scale=25;
+int N = 20, M = 20;
+int Scale=30;
 int statPanelWidth = Scale * 10;
 int statPanelHeight = Scale * 6;
 

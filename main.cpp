@@ -28,6 +28,8 @@ void OnMouseClick(int button, int state, int x, int y);
     Class Fruct represents game points which snake eats
 */
 class Fruct m[numberOfApples];
+
+
 class MenuButton
 {
 public:
@@ -35,9 +37,7 @@ public:
 	int width, height;
 	int stateOfButton;
 	const char * nameOfButton;
-	void (*onClickFunction)(int);
-
-	MenuButton(){};
+	void (*onClickFunction)(int); // pointer on function
 
 	void New()
 	{
@@ -53,8 +53,8 @@ public:
 		glRectf(x, y, x + width, y + height);
 
 		glColor3f(colorRedOfButtonText/255.0, colorGreenOfButtonText/255.0, colorBlueOfButtonText/255.0);
-		glRasterPos2f( x + spacing, y + spacing);
-		for( int i = 0; nameOfButton[i] > 0; i++ )
+		glRasterPos2f( x + spacing, y + spacing); //position of text
+		for( int i = 0; nameOfButton[i] > 0; i++ ) //cycle while symbol!=0
 		{
 			glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, nameOfButton[i] );
 		}
@@ -71,9 +71,9 @@ int main(int argc, char *argv[])
 		m[i].New();
     }
 
-	glutInit(&argc, argv);
-	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB );
-	glutInitWindowSize (w, h-menuPaneHeight);
+	glutInit(&argc, argv); //initializing of glut
+	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB ); // double buffering
+	glutInitWindowSize (w, h);
 	glutCreateWindow ("Zmeika");
 	glClearColor(1.0, 1.0, 0.6, 1.0);  //background color
 	glMatrixMode(GL_PROJECTION);
@@ -405,8 +405,8 @@ void onStatsButtonClick(int)
 	char speedStr[20];
 	sprintf(speedStr, "Speed: %i", speedDelay);
 
-	char sizeOfField[20];
-	sprintf(sizeOfField, "Size of field: %ix%i", N, M);
+	//char sizeOfField[20];
+	//sprintf(sizeOfField, "Size of field: %ix%i", N, M);
 
 	displayText(N/2*Scale - 2 * Scale,  M * Scale - Scale,
              colorRedOfStatsText, colorGreenOfStatsText, colorBlueOfStatsText, stat1);
@@ -414,8 +414,8 @@ void onStatsButtonClick(int)
              colorRedOfStatsText, colorGreenOfStatsText, colorBlueOfStatsText, minutesStr);
 	displayText(N/2*Scale - 2 * Scale,  M * Scale - 5 * Scale,
              colorRedOfStatsText, colorGreenOfStatsText, colorBlueOfStatsText, speedStr);
-    displayText(N/2 * Scale - 2 * Scale,  M * Scale - 7 * Scale,
-             colorRedOfStatsText, colorGreenOfStatsText, colorBlueOfStatsText, sizeOfField);
+    //displayText(N/2 * Scale - 2 * Scale,  M * Scale - 7 * Scale,
+    //         colorRedOfStatsText, colorGreenOfStatsText, colorBlueOfStatsText, sizeOfField);
 	glFlush();
 	glutSwapBuffers();
 }
@@ -454,5 +454,3 @@ void initializeButtons()
 		buttons[i].onClickFunction = onClickFunctionArray[i];
 	}
 }
-
-

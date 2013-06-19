@@ -4,7 +4,7 @@
 #include <ctime>
 #define maxLengthOfSnake 100
 #define numberOfMenuButtons 5
-#define numberOfApples 1
+#define numberOfApples 10
 
 extern int menuPaneHeight;
 extern int N, M;
